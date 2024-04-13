@@ -1,0 +1,6 @@
+@DesignsAndBuildWebsite_HostAddress = http://localhost:5050
+
+GET {{DesignsAndBuildWebsite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
