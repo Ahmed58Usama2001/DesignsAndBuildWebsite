@@ -1,7 +1,9 @@
 ﻿global using DesignsAndBuild.Repository;
 global using DesignsAndBuild.APIs.Errors;
+global using DesignsAndBuild.Core.Entities;
 global using DesignsAndBuild.APIs.Extensions;
 global using DesignsAndBuild.APIs.MiddleWares;
+
 global using DesignsAndBuild.Core.Repositories.Contract;
 global using DesignsAndBuild.Repository.Data.Configurations;
 

@@ -3,7 +3,6 @@ global using DesignsAndBuild.Core.Specifications;
 global using DesignsAndBuild.Core.Repositories.Contract;
 global using DesignsAndBuild.Repository.Data.Configurations;
 
-
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Infrastructure;

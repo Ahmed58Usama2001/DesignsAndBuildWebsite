@@ -14,5 +14,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\DesignsAndBuildWebsite.Core\DesignsAndBuild.Core.csproj" />
 	</ItemGroup>
-
 </Project>

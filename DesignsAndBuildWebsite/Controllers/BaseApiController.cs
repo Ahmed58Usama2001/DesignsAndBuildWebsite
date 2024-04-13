@@ -1,5 +1,4 @@
-﻿
-namespace DesignsAndBuild.APIs.Controllers;
+﻿namespace DesignsAndBuild.APIs.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

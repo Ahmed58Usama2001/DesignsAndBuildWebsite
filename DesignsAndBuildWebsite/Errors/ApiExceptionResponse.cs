@@ -1,5 +1,4 @@
-﻿
-namespace DesignsAndBuild.APIs.Errors;
+﻿namespace DesignsAndBuild.APIs.Errors;
 
 public class ApiExceptionResponse : ApiResponse
 {

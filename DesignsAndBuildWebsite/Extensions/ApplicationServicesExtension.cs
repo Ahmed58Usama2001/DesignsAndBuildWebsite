@@ -1,7 +1,4 @@
-﻿
-
-
-namespace DesignsAndBuild.APIs.Extensions;
+﻿namespace DesignsAndBuild.APIs.Extensions;
 
 public static class ApplicationServicesExtension
 {
