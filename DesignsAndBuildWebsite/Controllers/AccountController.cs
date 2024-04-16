@@ -166,4 +166,20 @@ public class AccountController : BaseApiController
             return BadRequest(new ApiResponse(400));
         }
     }
+
+    [HttpPost]
+    [HttpPost("GoogleSignIn")]
+
+    public async Task<IActionResult> GoogleSignIn(GoogleSignInVM model)
+    {
+        try
+        {
+            return (IActionResult)await _authService.SignInWithGoogle(model);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.ToString());
+            return null;
+        }
+    }
 }

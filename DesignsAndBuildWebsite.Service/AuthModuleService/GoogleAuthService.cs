@@ -17,7 +17,7 @@ public class GoogleAuthService : IGoogleAuthService
         _googleAuthConfig = googleAuthConfig.Value;
     }
 
-    public async Task<AppUser> GoogleSignIn(GoogleSignInDto model)
+    public async Task<AppUser> GoogleSignIn(GoogleSignInVM model)
     {
 
         Payload payload = new();

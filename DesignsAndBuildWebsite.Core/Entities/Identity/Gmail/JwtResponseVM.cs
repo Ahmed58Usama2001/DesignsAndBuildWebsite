@@ -1,7 +1,7 @@
 ﻿namespace DesignsAndBuild.Core.Entities.Identity.Gmail;
 
-public class GoogleSignInDto
+public class JwtResponseVM
 {
     [Required]
-    public string IdToken { get; set; }
+    public string Token { get; set; }
 }

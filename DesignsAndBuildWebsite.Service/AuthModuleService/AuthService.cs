@@ -1,12 +1,41 @@
-﻿namespace DesignsAndBuild.Service.AuthModuleService;
+﻿using Google;
+
+namespace DesignsAndBuild.Service.AuthModuleService;
 
 public class AuthService : IAuthService
 {
     private readonly IConfiguration _configuration;
+    private readonly DesignsAndBuildContext _context;
+    private readonly IGoogleAuthService _googleAuthService;
+    private readonly UserManager<AppUser> _userManager;
 
-    public AuthService(IConfiguration configuration)
+    public AuthService(IConfiguration configuration,
+        DesignsAndBuildContext context,
+         UserManager<AppUser> userManager,
+        IGoogleAuthService googleAuthService)
     {
+        _context = context;
+        _googleAuthService = googleAuthService;
+        _userManager = userManager;
         _configuration = configuration;
+    }
+
+
+    public async Task<JwtResponseVM> SignInWithGoogle(GoogleSignInVM model)
+    {
+        var response = await _googleAuthService.GoogleSignIn(model);
+
+        if (response is null)
+            return null;
+
+        var jwtResponse = await CreateTokenAsync(response,_userManager);
+
+        var data = new JwtResponseVM
+        {
+            Token = jwtResponse,
+        };
+
+        return data;
     }
 
     public async Task<string> CreateTokenAsync(AppUser user, UserManager<AppUser> userManager)
@@ -42,4 +71,5 @@ public class AuthService : IAuthService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
+  
 }
