@@ -1,6 +1,4 @@
-﻿
-
-namespace DesignsAndBuild.APIs.Controllers;
+﻿namespace DesignsAndBuild.APIs.Controllers;
 
 public class AccountController : BaseApiController
 {

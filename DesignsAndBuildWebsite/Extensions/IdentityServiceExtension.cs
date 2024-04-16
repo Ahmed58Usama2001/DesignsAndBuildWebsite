@@ -6,6 +6,8 @@ public static class IdentityServiceExtension
     {
 
         services.AddScoped(typeof(IAuthService), typeof(AuthService));
+        services.AddScoped(typeof(IGoogleAuthService), typeof(GoogleAuthService));
+
 
         services.AddIdentity<AppUser, IdentityRole>(options =>
         {

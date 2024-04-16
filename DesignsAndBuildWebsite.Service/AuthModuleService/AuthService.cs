@@ -1,4 +1,4 @@
-﻿namespace DesignsAndBuild.Service;
+﻿namespace DesignsAndBuild.Service.AuthModuleService;
 
 public class AuthService : IAuthService
 {

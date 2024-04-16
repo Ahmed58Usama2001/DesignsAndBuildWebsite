@@ -1,5 +1,4 @@
-﻿global using DesignsAndBuild.Service;
-global using DesignsAndBuild.Repository;
+﻿global using DesignsAndBuild.Repository;
 global using DesignsAndBuild.APIs.Errors;
 global using DesignsAndBuild.Core.Entities;
 global using DesignsAndBuild.APIs.Extensions;
@@ -7,9 +6,11 @@ global using DesignsAndBuild.APIs.MiddleWares;
 global using DesignsAndBuild.Repository.Identity;
 global using DesignsAndBuild.APIs.Dtos.AccountDtos;
 global using DesignsAndBuild.Core.Entities.Identity;
-global using DesignsAndBuild.Core.Services.Contract;
+global using DesignsAndBuild.Service.AuthModuleService;
 global using DesignsAndBuild.Core.Repositories.Contract;
+global using DesignsAndBuild.Core.Entities.Identity.Gmail;
 global using DesignsAndBuild.Repository.Data.Configurations;
+global using DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
 
 

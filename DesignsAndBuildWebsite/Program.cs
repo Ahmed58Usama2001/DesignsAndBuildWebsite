@@ -25,6 +25,7 @@ public class Program
 
         builder.Services.AddApplicationServices();
         builder.Services.AddIdentityServices(builder.Configuration);
+        builder.Services.Configure<GoogleAuthConfig>(builder.Configuration.GetSection("Google"));
 
 
         builder.Services.AddCors(options =>
@@ -48,7 +49,6 @@ public class Program
         ///
 
         var _identityDbContext = services.GetRequiredService<AppIdentityDbContext>();
-
 
 
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
