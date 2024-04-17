@@ -20,7 +20,7 @@ public static class CreateUserFromSocialLoginExtension
                 Email = model.Email,
                 UserName = model.Email.Split('@').First(),
                 ProfilePictureUrl = model.ProfilePicture,
-                RegistrationDate=DateTime.Now
+                RegistrationDate = DateTime.Now
             };
 
             await userManager.CreateAsync(user);
@@ -31,6 +31,8 @@ public static class CreateUserFromSocialLoginExtension
             await userManager.UpdateAsync(user);
             await context.SaveChangesAsync();
         }
+        else
+            return null;
 
         UserLoginInfo userLoginInfo = null;
         switch (loginProvider)

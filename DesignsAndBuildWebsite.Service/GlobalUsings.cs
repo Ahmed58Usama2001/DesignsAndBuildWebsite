@@ -5,7 +5,6 @@ global using DesignsAndBuild.Repository.Data.Configurations;
 global using DesignsAndBuild.Core.Entities.Identity.Facebook;
 global using DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
-
 global using Microsoft.Extensions.Options;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.IdentityModel.Tokens;

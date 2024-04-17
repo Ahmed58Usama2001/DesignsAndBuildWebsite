@@ -1,6 +1,4 @@
-﻿using DesignsAndBuild.Core.Entities.Identity.Gmail;
-
-namespace DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
+﻿namespace DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
 public interface IAuthService
 {

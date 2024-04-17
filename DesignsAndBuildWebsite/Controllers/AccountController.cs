@@ -172,12 +172,16 @@ public class AccountController : BaseApiController
     {
         try
         {
-            return (IActionResult)await _authService.SignInWithGoogle(model);
+            var result = (IActionResult)await _authService.SignInWithGoogle(model);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest(new ApiResponse(400));
         }
         catch (Exception ex)
         {
             Log.Error(ex.ToString());
-            return null;
+            return BadRequest(new ApiResponse(400));
         }
     }
 
@@ -186,12 +190,16 @@ public class AccountController : BaseApiController
     {
         try
         {
-            return (IActionResult)await _authService.SignInWithFacebook(model);
+            var result= (IActionResult)await _authService.SignInWithFacebook(model);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest(new ApiResponse(400));
         }
         catch (Exception ex)
         {
             Log.Error(ex.ToString());
-            return null;
+            return BadRequest(new ApiResponse(400));
         }
     }
 }

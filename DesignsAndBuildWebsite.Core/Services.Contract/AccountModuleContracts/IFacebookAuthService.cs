@@ -1,6 +1,4 @@
-﻿
-
-namespace DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
+﻿namespace DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
 public interface IFacebookAuthService
 {

@@ -12,8 +12,6 @@ global using DesignsAndBuild.Core.Entities.Identity.Gmail;
 global using DesignsAndBuild.Repository.Data.Configurations;
 global using DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
-
-
 global using AutoMapper;
 global using DesignsAndBuild.APIs.Helpers;
 
