@@ -167,14 +167,26 @@ public class AccountController : BaseApiController
         }
     }
 
-    [HttpPost]
     [HttpPost("GoogleSignIn")]
-
     public async Task<IActionResult> GoogleSignIn(GoogleSignInVM model)
     {
         try
         {
             return (IActionResult)await _authService.SignInWithGoogle(model);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.ToString());
+            return null;
+        }
+    }
+
+    [HttpPost("FacebookSignIn")]
+    public async Task<IActionResult> FacebookSignIn(FacebookSignInVM model)
+    {
+        try
+        {
+            return (IActionResult)await _authService.SignInWithFacebook(model);
         }
         catch (Exception ex)
         {

@@ -1,7 +1,7 @@
 ﻿namespace DesignsAndBuild.Core.Entities.Identity.Gmail;
 
-public class JwtResponseVM
+public class FacebookSignInVM
 {
     [Required]
-    public string Token { get; set; }
+    public string AccessToken { get; set; }
 }

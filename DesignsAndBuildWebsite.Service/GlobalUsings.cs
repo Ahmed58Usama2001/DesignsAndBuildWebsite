@@ -2,6 +2,7 @@
 global using DesignsAndBuild.Core.Entities.Identity.Enums;
 global using DesignsAndBuild.Core.Entities.Identity.Gmail;
 global using DesignsAndBuild.Repository.Data.Configurations;
+global using DesignsAndBuild.Core.Entities.Identity.Facebook;
 global using DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;
 
 
@@ -15,4 +16,5 @@ global using System.Security.Claims;
 global using System.IdentityModel.Tokens.Jwt;
 
 global using Serilog;
+global using Newtonsoft.Json;
 global using static Google.Apis.Auth.GoogleJsonWebSignature;

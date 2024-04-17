@@ -1,23 +1,24 @@
-﻿using Google;
-
-namespace DesignsAndBuild.Service.AuthModuleService;
+﻿namespace DesignsAndBuild.Service.AuthModuleService;
 
 public class AuthService : IAuthService
 {
     private readonly IConfiguration _configuration;
     private readonly DesignsAndBuildContext _context;
     private readonly IGoogleAuthService _googleAuthService;
+    private readonly IFacebookAuthService _facebookAuthService;
     private readonly UserManager<AppUser> _userManager;
 
     public AuthService(IConfiguration configuration,
         DesignsAndBuildContext context,
          UserManager<AppUser> userManager,
-        IGoogleAuthService googleAuthService)
+        IGoogleAuthService googleAuthService,
+        IFacebookAuthService facebookAuthService)
     {
         _context = context;
         _googleAuthService = googleAuthService;
         _userManager = userManager;
         _configuration = configuration;
+        _facebookAuthService = facebookAuthService;
     }
 
 
@@ -36,6 +37,44 @@ public class AuthService : IAuthService
         };
 
         return data;
+    }
+
+    public async Task<JwtResponseVM> SignInWithFacebook(FacebookSignInVM model)
+    {
+        var validatedFbToken = await _facebookAuthService.ValidateFacebookToken(model.AccessToken);
+
+        if (validatedFbToken is null)
+            return null;
+
+        var userInfo = await _facebookAuthService.GetFacebookUserInformation(model.AccessToken);
+
+        if (userInfo is null)
+            return null;
+
+        var userToBeCreated = new CreateUserFromSocialLogin
+        {
+            UserName = userInfo.Name,
+            Email = userInfo.Email,
+            ProfilePicture = userInfo.Picture.Data.Url.AbsoluteUri,
+            LoginProviderSubject = userInfo.Id,
+        };
+
+        var user = await _userManager.CreateUserFromSocialLogin(_context, userToBeCreated, LoginProvider.Facebook);
+
+        if (user is not null)
+        {
+            var jwtResponse = await CreateTokenAsync(user,_userManager);
+
+            var data = new JwtResponseVM
+            {
+                Token = jwtResponse,
+            };
+
+            return data;
+        }
+
+        return null;
+
     }
 
     public async Task<string> CreateTokenAsync(AppUser user, UserManager<AppUser> userManager)

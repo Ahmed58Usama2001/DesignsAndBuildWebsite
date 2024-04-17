@@ -7,4 +7,6 @@ public interface IAuthService
     Task<string> CreateTokenAsync(AppUser user, UserManager<AppUser> userManager);
 
     Task<JwtResponseVM> SignInWithGoogle(GoogleSignInVM model);
+    Task<JwtResponseVM> SignInWithFacebook(FacebookSignInVM model);
+
 }
