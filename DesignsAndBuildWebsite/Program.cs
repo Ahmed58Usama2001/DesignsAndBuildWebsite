@@ -1,4 +1,5 @@
 using DesignsAndBuild.Core.Entities.Identity.Facebook;
+using StackExchange.Redis;
 
 namespace DesignsAndBuild.APIs;
 
@@ -23,6 +24,12 @@ public class Program
         builder.Services.AddDbContext<AppIdentityDbContext>(options =>
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+
+        builder.Services.AddSingleton<IConnectionMultiplexer>((serviceProvider) =>
+        {
+            var connection = builder.Configuration.GetConnectionString("Redis");
+            return ConnectionMultiplexer.Connect(connection);
         });
 
         builder.Services.AddApplicationServices();

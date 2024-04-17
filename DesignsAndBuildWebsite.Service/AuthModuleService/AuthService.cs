@@ -1,4 +1,6 @@
-﻿namespace DesignsAndBuild.Service.AuthModuleService;
+﻿using StackExchange.Redis;
+
+namespace DesignsAndBuild.Service.AuthModuleService;
 
 public class AuthService : IAuthService
 {
@@ -7,18 +9,22 @@ public class AuthService : IAuthService
     private readonly IGoogleAuthService _googleAuthService;
     private readonly IFacebookAuthService _facebookAuthService;
     private readonly UserManager<AppUser> _userManager;
+    private readonly IConnectionMultiplexer _redis;
+
 
     public AuthService(IConfiguration configuration,
         DesignsAndBuildContext context,
          UserManager<AppUser> userManager,
         IGoogleAuthService googleAuthService,
-        IFacebookAuthService facebookAuthService)
+        IFacebookAuthService facebookAuthService,
+        IConnectionMultiplexer redis)
     {
         _context = context;
         _googleAuthService = googleAuthService;
         _userManager = userManager;
         _configuration = configuration;
         _facebookAuthService = facebookAuthService;
+        _redis = redis;
     }
 
 
@@ -110,5 +116,23 @@ public class AuthService : IAuthService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-  
+    public async Task<bool> InvalidateSignedInTokenAsync(string token)
+    {
+        try
+        {
+            var redis = _redis.GetDatabase(); // Access the Redis database using dependency injection
+
+            var key = $"blacklisted_token:{token}"; // Use a descriptive key format
+            var expiration = TimeSpan.FromDays(1); // Set expiration for 1 day
+
+            var added = await redis.StringSetAsync(key, string.Empty, expiration, (When)CommandFlags.None);
+
+            return added;
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.ToString());
+            return false;
+        }
+    }
 }
