@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-
+﻿
 namespace DesignsAndBuild.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity

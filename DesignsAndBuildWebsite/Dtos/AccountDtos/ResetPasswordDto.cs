@@ -1,10 +1,9 @@
-﻿namespace DesignsAndBuild.APIs.Dtos.AccountDtos
+﻿namespace DesignsAndBuild.APIs.Dtos.AccountDtos;
+
+public class ResetPasswordDto
 {
-    public class ResetPasswordDto
-    {
-        [Required]
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string Token { get; set; }
-    }
+    [Required]
+    public string Password { get; set; }
+    public string Email { get; set; }
+    public string Token { get; set; }
 }

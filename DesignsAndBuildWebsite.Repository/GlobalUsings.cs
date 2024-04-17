@@ -11,3 +11,4 @@ global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 global using System.Reflection;
 global using System.Collections;
+global using System.Linq.Expressions;

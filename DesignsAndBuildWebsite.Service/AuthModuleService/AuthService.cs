@@ -1,6 +1,4 @@
-﻿using StackExchange.Redis;
-
-namespace DesignsAndBuild.Service.AuthModuleService;
+﻿namespace DesignsAndBuild.Service.AuthModuleService;
 
 public class AuthService : IAuthService
 {

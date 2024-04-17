@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using StackExchange.Redis;
-
-namespace MultaqaTech.APIs.MiddleWares;
+﻿namespace DesignsAndBuild.APIs.MiddleWares;
 
 public class JwtBlacklistMiddleware
 {

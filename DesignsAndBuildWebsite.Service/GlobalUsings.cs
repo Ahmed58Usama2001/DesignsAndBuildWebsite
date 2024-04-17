@@ -16,4 +16,5 @@ global using System.IdentityModel.Tokens.Jwt;
 
 global using Serilog;
 global using Newtonsoft.Json;
+global using StackExchange.Redis;
 global using static Google.Apis.Auth.GoogleJsonWebSignature;
