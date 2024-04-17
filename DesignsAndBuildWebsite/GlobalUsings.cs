@@ -33,6 +33,7 @@ global using Serilog;
 global using AutoMapper;
 global using Newtonsoft.Json;
 global using StackExchange.Redis;
+global using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
 
