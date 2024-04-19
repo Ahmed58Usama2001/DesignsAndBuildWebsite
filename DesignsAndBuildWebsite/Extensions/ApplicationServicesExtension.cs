@@ -1,10 +1,14 @@
-﻿namespace DesignsAndBuild.APIs.Extensions;
+﻿using DesignsAndBuild.Core.Mail.Contract;
+
+namespace DesignsAndBuild.APIs.Extensions;
 
 public static class ApplicationServicesExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+       
 
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddHttpClient();

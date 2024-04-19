@@ -25,6 +25,7 @@ public class Program
 
         builder.Services.AddApplicationServices();
         builder.Services.AddIdentityServices(builder.Configuration);
+        builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 
         builder.Services.AddCors(options =>

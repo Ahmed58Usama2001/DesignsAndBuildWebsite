@@ -3,10 +3,10 @@
     public class MappingProfiles : Profile
     {
 
-        public MappingProfiles()
+        public MappingProfiles( )
         {
-
             
+            CreateMap<CustomerMessageDetails,CustomerMessageDetailsDto>().ReverseMap(); 
         }
     }
 }

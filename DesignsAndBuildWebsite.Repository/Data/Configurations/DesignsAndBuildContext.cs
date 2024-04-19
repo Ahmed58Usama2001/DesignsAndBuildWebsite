@@ -11,4 +11,7 @@ public class DesignsAndBuildContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) 
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+
+    public DbSet<CustomerMessageDetails> CustomerMessages { get; set; }
 }

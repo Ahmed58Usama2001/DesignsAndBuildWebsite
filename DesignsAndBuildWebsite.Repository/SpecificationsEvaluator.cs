@@ -15,9 +15,9 @@ internal static class SpecificationsEvaluator<TEntity> where TEntity : BaseEntit
             query= query.OrderByDescending(specs.OrderByDesc);
 
         if (specs.IsPaginationEnabled)
-            query = query.Skip(specs.Skip).Take(specs.Take);
+            query = query.Skip(specs?.Skip??0).Take(specs?.Take??5);
 
-        query = specs.Includes.Aggregate(query, (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
+        query = specs?.Includes.Aggregate(query, (currentQuery, includeExpression) => currentQuery.Include(includeExpression))?? inputQuery;
 
         return query;
     }

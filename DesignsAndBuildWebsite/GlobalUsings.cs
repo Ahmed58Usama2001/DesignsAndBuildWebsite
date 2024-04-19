@@ -32,4 +32,8 @@ global using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 global using Serilog;
 
+global using DesignsAndBuild.APIs.Dtos.MaillingDtos;
+global using DesignsAndBuild.Core.Entities.MailSettings;
 
+global using DesignsAndBuild.Core.Mail.Contract;
+global using DesignsAndBuild.Core.Specifications;
