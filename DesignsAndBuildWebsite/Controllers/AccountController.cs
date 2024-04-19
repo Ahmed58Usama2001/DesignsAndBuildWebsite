@@ -1,6 +1,4 @@
-﻿
-
-namespace DesignsAndBuild.APIs.Controllers;
+﻿namespace DesignsAndBuild.APIs.Controllers;
 
 public class AccountController : BaseApiController
 {
@@ -8,18 +6,23 @@ public class AccountController : BaseApiController
     private readonly SignInManager<AppUser> _signInManager;
     private readonly IAuthService _authService;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly IMapper _mapper;
+    private readonly IConfiguration _configuration;
+    private readonly HttpClient _httpClient;
+
 
     public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
         IAuthService authService,
         RoleManager<IdentityRole> roleManager,
-        IMapper mapper)
+        IConfiguration configuration,
+        HttpClient httpClient
+        )
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _authService = authService;
         _roleManager = roleManager;
-        _mapper = mapper;
+        _configuration = configuration;
+        _httpClient = httpClient;
     }
 
     [HttpPost("login")]
@@ -168,4 +171,97 @@ public class AccountController : BaseApiController
             return BadRequest(new ApiResponse(400));
         }
     }
+
+    [HttpPost("GoogleSignIn")]
+    public async Task<IActionResult> GoogleSignIn(GoogleSignInVM model)
+    {
+        try
+        {
+            var result = (IActionResult)await _authService.SignInWithGoogle(model);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest(new ApiResponse(400));
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.ToString());
+            return BadRequest(new ApiResponse(400));
+        }
+    }
+
+    [HttpPost("FacebookSignIn")]
+    public async Task<IActionResult> FacebookSignIn(FacebookSignInVM model)
+    {
+        try
+        {
+            var result= (IActionResult)await _authService.SignInWithFacebook(model);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest(new ApiResponse(400));
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.ToString());
+            return BadRequest(new ApiResponse(400));
+        }
+    }
+
+    [Authorize]
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+
+        var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+        if (token != null)
+        {
+            try
+            {
+                await _authService.InvalidateSignedInTokenAsync(token); // Call your AuthService method
+                return Ok(new { message = "Logged out successfully" });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message); // Log the error
+                return BadRequest(new { message = "Error during logout" });
+            }
+        }
+
+        return BadRequest(new { message = "Unable to logout" });
+    }
+
+    [HttpGet("Captcha")]
+    public async Task<bool> GetreCaptchaResponse(string userResponse)
+    {
+        var reCaptchaSecretKey = _configuration["reCaptcha:SecretKey"];
+
+        if (reCaptchaSecretKey != null && userResponse != null)
+        {
+            var content = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    {"secret", reCaptchaSecretKey },
+                    {"response", userResponse }
+                });
+            var response = await _httpClient.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var result = await response.Content.ReadFromJsonAsync<reCaptchaResponse>();
+                    return result.Success;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex.Message); 
+                    return false;
+                }
+
+            }
+        }
+        return false;
+    }
+
 }

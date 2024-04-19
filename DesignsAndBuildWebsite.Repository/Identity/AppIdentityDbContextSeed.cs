@@ -11,7 +11,6 @@ public static class AppIdentityDbContextSeed
             {   
                 Email = "ahmedusamasaad@gmail.com",
                 UserName = "ahmedusamasaad",
-                PhoneNumber = "01024430384",
                 RegistrationDate= DateTime.Now
             };
 

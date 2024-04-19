@@ -1,3 +1,4 @@
+
 namespace DesignsAndBuild.APIs;
 
 public class Program
@@ -23,8 +24,21 @@ public class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
+        builder.Services.AddSingleton<IConnectionMultiplexer>((serviceProvider) =>
+        {
+            var connection = builder.Configuration.GetConnectionString("Redis");
+            return ConnectionMultiplexer.Connect(connection);
+        });
+
         builder.Services.AddApplicationServices();
         builder.Services.AddIdentityServices(builder.Configuration);
+        builder.Services.Configure<GoogleAuthConfig>(builder.Configuration.GetSection("Google"));
+        builder.Services.Configure<FacebookAuthConfig>(builder.Configuration.GetSection("Facebook"));
+        builder.Services.AddHttpClient("Facebook", c =>
+        {
+            c.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Facebook:BaseUrl"));
+        });
+        builder.Services.AddHttpClient();
         builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 
@@ -35,6 +49,7 @@ public class Program
                 options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
             });
         });
+
 
         #endregion
 
@@ -49,7 +64,6 @@ public class Program
         ///
 
         var _identityDbContext = services.GetRequiredService<AppIdentityDbContext>();
-
 
 
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
@@ -74,6 +88,8 @@ public class Program
         #region Configure Middlewares
 
         app.UseMiddleware<ExceptionMiddleWare>();
+        app.UseMiddleware<JwtBlacklistMiddleware>();
+
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

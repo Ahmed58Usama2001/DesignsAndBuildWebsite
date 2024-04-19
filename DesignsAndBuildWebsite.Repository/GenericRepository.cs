@@ -1,4 +1,5 @@
-﻿namespace DesignsAndBuild.Repository;
+﻿
+namespace DesignsAndBuild.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
@@ -14,9 +15,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return await _dbContext.Set<T>().ToListAsync();
     }
 
-    public async Task<List<T>> GetAllAsListAsync()
+    public async Task<T?> FindAsync(Expression<Func<T, bool>> predicate)
     {
-        return await _dbContext.Set<T>().ToListAsync();
+        return await _dbContext.Set<T>().FirstOrDefaultAsync(predicate);
     }
 
     public async Task<IReadOnlyList<T>> GetAllByIdsAsync(List<int> ids)

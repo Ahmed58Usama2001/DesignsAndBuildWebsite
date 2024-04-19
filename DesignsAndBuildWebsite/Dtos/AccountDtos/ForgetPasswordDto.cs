@@ -1,9 +1,8 @@
-﻿namespace DesignsAndBuild.APIs.Dtos.AccountDtos
+﻿namespace DesignsAndBuild.APIs.Dtos.AccountDtos;
+
+public class ForgetPasswordDto
 {
-    public class ForgetPasswordDto
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-    }
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 }
