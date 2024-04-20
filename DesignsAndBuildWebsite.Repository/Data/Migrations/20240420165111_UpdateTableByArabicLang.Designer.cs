@@ -4,6 +4,7 @@ using DesignsAndBuild.Repository.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesignsAndBuild.Repository.Data.Migrations
 {
     [DbContext(typeof(DesignsAndBuildContext))]
-    partial class DesignsAndBuildContextModelSnapshot : ModelSnapshot
+    [Migration("20240420165111_UpdateTableByArabicLang")]
+    partial class UpdateTableByArabicLang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,12 +84,10 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ArabicClientName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar");
 
                     b.Property<string>("ArabicDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ArabicDuration")
@@ -95,17 +96,14 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                         .HasColumnType("nvarchar");
 
                     b.Property<string>("ArabicTitle")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar");
 
                     b.Property<string>("ClientName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Duration")
@@ -114,7 +112,6 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                         .HasColumnType("nvarchar");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar");
 

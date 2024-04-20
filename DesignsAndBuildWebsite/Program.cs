@@ -14,9 +14,10 @@ public class Program
 
         builder.Services.AddSwaggerServices();
 
+
         builder.Services.AddDbContext<DesignsAndBuildContext>(options =>
         {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
         builder.Services.AddDbContext<AppIdentityDbContext>(options =>

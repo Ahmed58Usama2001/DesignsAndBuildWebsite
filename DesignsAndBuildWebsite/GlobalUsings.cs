@@ -42,3 +42,6 @@ global using DesignsAndBuild.Core.Entities.MailSettings;
 
 global using DesignsAndBuild.Core.Mail.Contract;
 global using DesignsAndBuild.Core.Specifications;
+global using DesignsAndBuild.APIs.Dtos.ProjectDtos;
+global using DesignsAndBuild.Core.Services.Contract.OurProjectPage.Services;
+ 

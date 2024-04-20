@@ -1,8 +1,8 @@
-﻿
-namespace DesignsAndBuild.Repository.Data.Configurations;
+﻿namespace DesignsAndBuild.Repository.Data.Configurations;
 
 public class MessageMailConfigration : IEntityTypeConfiguration<CustomerMessageDetails>
 {
+
     public void Configure(EntityTypeBuilder<CustomerMessageDetails> builder)
     {
         builder.HasKey(e => e.Id);
@@ -25,7 +25,6 @@ public class MessageMailConfigration : IEntityTypeConfiguration<CustomerMessageD
 
         builder.Property(e => e.SendMessageDate).IsRequired(false);
 
-        builder.Property(e=>e.DateMessageSeenAt).IsRequired(false);
-           
+        builder.Property(e => e.DateMessageSeenAt).IsRequired(false);
     }
 }

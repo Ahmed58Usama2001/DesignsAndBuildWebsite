@@ -16,3 +16,4 @@ global using DesignsAndBuild.Core.Entities.MailSettings;
  
 global using System.Collections;
 global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

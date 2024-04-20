@@ -4,6 +4,7 @@ using DesignsAndBuild.Repository.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesignsAndBuild.Repository.Data.Migrations
 {
     [DbContext(typeof(DesignsAndBuildContext))]
-    partial class DesignsAndBuildContextModelSnapshot : ModelSnapshot
+    [Migration("20240420165755_UpdateTableByArabicLangRequiredAtt")]
+    partial class UpdateTableByArabicLangRequiredAtt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

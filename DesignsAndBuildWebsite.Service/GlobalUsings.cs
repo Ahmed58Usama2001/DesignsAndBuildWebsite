@@ -23,4 +23,5 @@ global using Newtonsoft.Json;
 global using StackExchange.Redis;
 global using static Google.Apis.Auth.GoogleJsonWebSignature;
 global using Serilog;
-
+global using DesignsAndBuild.Core.Entities;
+global using DesignsAndBuild.Core.Services.Contract.OurProjectPage.Services;
