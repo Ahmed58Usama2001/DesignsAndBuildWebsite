@@ -13,7 +13,7 @@ public class DesignsAndBuildContext : DbContext
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
 
-    public DbSet<CustomerMessageDetails> CustomerMessages { get; set; }
-    public DbSet<OurProjectImages> ProjectImags { get; set; }
-    public DbSet<OurProject> Projects { get; set; }
+    public DbSet<UserMessage> UserMessages { get; set; }
+    public DbSet<OurProjectImages> ProjectImages { get; set; }
+    public DbSet<OurProject> OurProjects { get; set; }
 }

@@ -5,7 +5,7 @@ public class MappingProfiles : Profile
         public MappingProfiles()
         {
             
-            CreateMap<CustomerMessageDetails,CustomerMessageDetailsDto>().ReverseMap();
+            CreateMap<UserMessage, UserMessageDto>().ReverseMap();
 
 
         #region OurProject

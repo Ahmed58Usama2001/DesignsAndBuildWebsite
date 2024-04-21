@@ -1,11 +1,4 @@
-﻿using DesignsAndBuild.APIs.Helpers;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MimeKit;
-
-namespace DesignsAndBuild.Service;
+﻿namespace DesignsAndBuild.Service;
 
 public class MailService : IMaillingService
 {

@@ -1,10 +1,11 @@
-﻿namespace DesignsAndBuild.Service.OurProjectsServices;
+﻿
+namespace DesignsAndBuild.Service.OurProjectsServices;
 
-public class OurProjectServices: IOurProjectServices
+public class ProjectServices: IProjectServices
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public OurProjectServices(IUnitOfWork unitOfWork)
+    public ProjectServices(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
@@ -71,7 +72,7 @@ public class OurProjectServices: IOurProjectServices
         }
     }
 
-    public async Task<OurProject?> UpdateSubject(OurProject storedProject, OurProject newProject)
+    public async Task<OurProject?> UpdateProject(OurProject storedProject, OurProject newProject)
     {
 
         if (newProject == null || storedProject == null)
@@ -110,7 +111,7 @@ public class OurProjectServices: IOurProjectServices
         }
     }
 
-    public async Task<bool> DeleteSubject(OurProject project)
+    public async Task<bool> DeleteProject(OurProject project)
     {
 
         try
@@ -145,4 +146,6 @@ public class OurProjectServices: IOurProjectServices
 
         return count;
     }
+
+   
 }

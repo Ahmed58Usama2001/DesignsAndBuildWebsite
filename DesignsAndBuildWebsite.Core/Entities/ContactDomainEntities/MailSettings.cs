@@ -1,4 +1,4 @@
-﻿namespace DesignsAndBuild.APIs.Helpers;
+﻿namespace DesignsAndBuild.Core.Entities.MailSettings;
 
 public class MailSettings
 {

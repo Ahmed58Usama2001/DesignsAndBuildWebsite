@@ -1,13 +1,11 @@
-﻿using DesignsAndBuild.Service.OurProjectsServices;
-
-namespace DesignsAndBuild.APIs.Extensions;
+﻿namespace DesignsAndBuild.APIs.Extensions;
 
 public static class ApplicationServicesExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-        services.AddScoped(typeof(IOurProjectServices), typeof(OurProjectServices));
+        services.AddScoped(typeof(IProjectServices), typeof(ProjectServices));
 
 
         services.AddAutoMapper(typeof(MappingProfiles));

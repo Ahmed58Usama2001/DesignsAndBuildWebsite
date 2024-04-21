@@ -2,10 +2,10 @@
 
 public class OurProjectController : BaseApiController
 {
-    private readonly IOurProjectServices _projectService;
+    private readonly IProjectServices _projectService;
     private readonly IMapper _mapper;
 
-    public OurProjectController(IOurProjectServices projectService, IMapper mapper)
+    public OurProjectController(IProjectServices projectService, IMapper mapper)
     {
         _projectService = projectService;
         _mapper = mapper;
@@ -94,7 +94,7 @@ public class OurProjectController : BaseApiController
         if (!string.IsNullOrEmpty(newProject?.VideoUrl))
             newProject.VideoUrl = DocumentSetting.UploadFile(updatedProjectDto?.Video, "Videos\\ProjectsVideos");
 
-        storedProject = await _projectService.UpdateSubject(storedProject, newProject);
+        storedProject = await _projectService.UpdateProject(storedProject, newProject);
 
         if (storedProject == null)
             return BadRequest(new ApiResponse(400));
@@ -112,7 +112,7 @@ public class OurProjectController : BaseApiController
         if (project is null)
             return NotFound(new ApiResponse(404));
 
-        var result =await _projectService.DeleteSubject(project);
+        var result =await _projectService.DeleteProject(project);
 
         if (result)
         {
