@@ -5,8 +5,7 @@ public class OurProjectWithIncludesSpecifications : BaseSpecifications<OurProjec
 {
     public OurProjectWithIncludesSpecifications(OurProjectSpeceficationsParams speceficationsParams)
         : base(p =>
-              (!speceficationsParams.duration.HasValue || p.DurationInDays <= speceficationsParams.duration)
-            &&
+              
             (string.IsNullOrEmpty(speceficationsParams.Search)
               || p.Title.ToLower().Contains(speceficationsParams.Search)
               || p.ArabicTitle.ToLower().Contains(speceficationsParams.Search)
@@ -18,22 +17,6 @@ public class OurProjectWithIncludesSpecifications : BaseSpecifications<OurProjec
 
     {
         AddIncludes();
-
-        if(!string.IsNullOrEmpty(speceficationsParams.sort))
-        {
-            switch (speceficationsParams.sort)
-            {
-                case "DurationAsc":
-                    AddOrderBy(p => p.DurationInDays);
-                    break;
-
-                default:
-                    AddOrderByDesc(p => p.DurationInDays);
-                    break;
-            }
-        }
-        else
-            AddOrderByDesc(p => p.DurationInDays);
 
         ApplyPagination((speceficationsParams.PageIndex - 1) * speceficationsParams.PageSize, speceficationsParams.PageSize);
     }

@@ -2,9 +2,6 @@
 
 public class OurProjectSpeceficationsParams
 {
-    public int? duration { get; set; }
-
-    public string? sort { get; set; }
 
     private string? search;
 
