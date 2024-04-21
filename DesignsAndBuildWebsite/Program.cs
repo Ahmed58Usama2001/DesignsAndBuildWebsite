@@ -1,4 +1,3 @@
-
 namespace DesignsAndBuild.APIs;
 
 public class Program
@@ -32,12 +31,14 @@ public class Program
         });
 
         builder.Services.AddApplicationServices();
+
         builder.Services.AddIdentityServices(builder.Configuration);
+
         builder.Services.Configure<GoogleAuthConfig>(builder.Configuration.GetSection("Google"));
         builder.Services.Configure<FacebookAuthConfig>(builder.Configuration.GetSection("Facebook"));
         builder.Services.AddHttpClient("Facebook", c =>
         {
-            c.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Facebook:BaseUrl"));
+            c.BaseAddress = new Uri("https://graph.facebook.com/v15.0/");
         });
         builder.Services.AddHttpClient();
         builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));

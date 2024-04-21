@@ -14,6 +14,6 @@ public class DesignsAndBuildContext : DbContext
 
 
     public DbSet<CustomerMessageDetails> CustomerMessages { get; set; }
-    public DbSet<ProjectImags> ProjectImags { get; set; }
+    public DbSet<OurProjectImages> ProjectImags { get; set; }
     public DbSet<OurProject> Projects { get; set; }
 }

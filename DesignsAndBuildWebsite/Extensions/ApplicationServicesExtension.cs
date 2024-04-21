@@ -1,6 +1,4 @@
-﻿using DesignsAndBuild.Core.Mail.Contract;
-using DesignsAndBuild.Core.Services.Contract.OurProjectPage.Services;
-using DesignsAndBuild.Service.OurProjectsServices;
+﻿using DesignsAndBuild.Service.OurProjectsServices;
 
 namespace DesignsAndBuild.APIs.Extensions;
 
@@ -9,12 +7,11 @@ public static class ApplicationServicesExtension
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+        services.AddScoped(typeof(IOurProjectServices), typeof(OurProjectServices));
 
-       
 
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddHttpClient();
-        services.AddScoped(typeof(IProjectServices<OurProject>), typeof(ProjectServices));
 
         services.Configure<ApiBehaviorOptions>(options =>
         {

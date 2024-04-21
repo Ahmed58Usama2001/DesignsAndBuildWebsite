@@ -1,12 +1,19 @@
-﻿namespace DesignsAndBuild.Core.Services.Contract.OurProjectPage.Services;
+﻿using DesignsAndBuild.Core.Specifications.OurProject_Specs;
 
-public interface IProjectServices<T> where T : BaseEntity
+namespace DesignsAndBuild.Core.Services.Contract.OurProjectPage.Services;
+
+public interface IOurProjectServices 
 {
-    public  Task<bool> CreateProjectAsync(T ourProject);
+     Task<OurProject?> CreateProjectAsync(OurProject ourProject);
 
-    public Task<IReadOnlyList<T>> GetAllProjectsAsync();
+    Task<IReadOnlyList<OurProject>> ReadAllProjectsAsync(OurProjectSpeceficationsParams speceficationsParams);
 
-    public Task<T> GetProjectByIdAsync(int id);
-    public Task<bool> UpdateProject(OurProject project);
-    public Task<bool> DeleteProjectAsync(OurProject project);
+     Task<OurProject?> ReadProjectByIdAsync(int projectId);
+
+    Task<OurProject?> UpdateSubject(OurProject storedProject, OurProject newProject);
+
+    Task<bool> DeleteSubject(OurProject project);
+
+    Task<int> GetCountAsync(OurProjectSpeceficationsParams speceficationsParams);
+
 }

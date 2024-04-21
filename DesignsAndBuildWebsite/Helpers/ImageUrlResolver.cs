@@ -14,9 +14,9 @@
         {
             var ImagesUrl = new List<string>();
 
-            if (source.Imags.Count() > 0)
+            if (source?.Images?.Count() > 0)
             {
-                foreach (var item in source.Imags)
+                foreach (var item in source.Images)
                 {
                     ImagesUrl.Add($"{_configuration["ApiBaseUrl"]}/{item.PictureUrl}");
                 }

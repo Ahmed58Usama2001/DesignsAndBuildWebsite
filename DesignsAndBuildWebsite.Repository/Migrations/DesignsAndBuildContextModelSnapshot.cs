@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DesignsAndBuild.Repository.Data.Migrations
+namespace DesignsAndBuild.Repository.Migrations
 {
     [DbContext(typeof(DesignsAndBuildContext))]
     partial class DesignsAndBuildContextModelSnapshot : ModelSnapshot
@@ -38,20 +38,18 @@ namespace DesignsAndBuild.Repository.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsSeened")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -62,6 +60,7 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SeenByWho")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("SendMessageDate")
@@ -72,7 +71,7 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                     b.ToTable("CustomerMessages");
                 });
 
-            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProject", b =>
+            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProjectDomainEntity.OurProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,52 +80,48 @@ namespace DesignsAndBuild.Repository.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ArabicClientName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ArabicDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ArabicDuration")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ArabicTitle")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("VideoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ClientProjects", (string)null);
+                    b.ToTable("OurProjects", (string)null);
                 });
 
-            modelBuilder.Entity("DesignsAndBuild.Core.Entities.ProjectImags", b =>
+            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProjectDomainEntity.OurProjectImages", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,32 +129,32 @@ namespace DesignsAndBuild.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("OurProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PictureUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("OurProjectId");
 
                     b.ToTable("ProjectImags");
                 });
 
-            modelBuilder.Entity("DesignsAndBuild.Core.Entities.ProjectImags", b =>
+            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProjectDomainEntity.OurProjectImages", b =>
                 {
-                    b.HasOne("DesignsAndBuild.Core.Entities.OurProject", null)
-                        .WithMany("Imags")
-                        .HasForeignKey("ProjectId")
+                    b.HasOne("DesignsAndBuild.Core.Entities.OurProjectDomainEntity.OurProject", null)
+                        .WithMany("Images")
+                        .HasForeignKey("OurProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProject", b =>
+            modelBuilder.Entity("DesignsAndBuild.Core.Entities.OurProjectDomainEntity.OurProject", b =>
                 {
-                    b.Navigation("Imags");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
