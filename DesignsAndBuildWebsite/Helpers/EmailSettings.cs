@@ -6,7 +6,7 @@ public static class EmailSettings
     {
         var client = new SmtpClient("smtp.gmail.com", 587);
         client.EnableSsl = true;
-        client.Credentials = new NetworkCredential("ahmedusamasaad@gmail.com", "Osama58200165");
-        client.Send("ahmedusamasaad@gmail.com", email.To, email.Title, email.Body);
+        client.Credentials = new NetworkCredential("multaqatech3@gmail.com", "fojtfxghywlyxqvy");
+        client.Send("multaqatech3@gmail.com", email.To, email.Title, email.Body);
     }
 }
