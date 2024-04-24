@@ -1,4 +1,5 @@
 ﻿using DesignsAndBuild.Core.Entities.Identity;
+using DesignsAndBuild.Core.Mail.Contract;
 
 namespace DesignsAndBuild.APIs.Controllers;
 
@@ -245,35 +246,5 @@ public class AccountController : BaseApiController
         return BadRequest(new { message = "Unable to logout" });
     }
 
-    [HttpGet("Captcha")]
-    public async Task<bool> GetreCaptchaResponse(string userResponse)
-    {
-        var reCaptchaSecretKey = _configuration["reCaptcha:SecretKey"];
-
-        if (reCaptchaSecretKey != null && userResponse != null)
-        {
-            var content = new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    {"secret", reCaptchaSecretKey },
-                    {"response", userResponse }
-                });
-            var response = await _httpClient.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var result = await response.Content.ReadFromJsonAsync<reCaptchaResponse>();
-                    return result.Success;
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex.Message); 
-                    return false;
-                }
-
-            }
-        }
-        return false;
-    }
 
 }

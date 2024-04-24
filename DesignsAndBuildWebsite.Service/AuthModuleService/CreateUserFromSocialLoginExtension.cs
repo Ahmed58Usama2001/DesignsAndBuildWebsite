@@ -31,8 +31,7 @@ public static class CreateUserFromSocialLoginExtension
             await userManager.UpdateAsync(user);
             await context.SaveChangesAsync();
         }
-        else
-            return null;
+    
 
         UserLoginInfo userLoginInfo = null;
         switch (loginProvider)
