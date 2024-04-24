@@ -79,6 +79,7 @@ public class Program
             await _identityDbContext.Database.MigrateAsync(); // Update-Database
 
             var _userManager = services.GetRequiredService<UserManager<AppUser>>();
+            
             await AppIdentityDbContextSeed.SeedUsersAsync(_userManager); // Data Seeding
         }
         catch (Exception ex)

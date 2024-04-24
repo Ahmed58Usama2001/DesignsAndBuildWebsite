@@ -6,7 +6,7 @@ public static class ApplicationServicesExtension
     {
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         services.AddScoped(typeof(IProjectServices), typeof(ProjectServices));
-
+        services.AddScoped(typeof(IMaillingService), typeof(MailService));
 
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddHttpClient();

@@ -10,7 +10,7 @@ public class MailService : IMaillingService
         _mailSetting = mailSetting;
         _logger = logger;
     }
-    public async Task SendEmailAsync(string mailTo, string subject, string body)
+    public async Task<bool> SendEmailAsync(string mailTo, string subject, string body)
     {
         try
         {
@@ -35,10 +35,13 @@ public class MailService : IMaillingService
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
 
+            return true;
+
         }
         catch (Exception ex)
         {
-            await Console.Out.WriteLineAsync(ex.Message);
+            Log.Error(ex.Message);
+            return false;
         }
     }
 }

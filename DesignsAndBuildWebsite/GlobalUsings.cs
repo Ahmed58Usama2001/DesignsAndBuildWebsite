@@ -41,6 +41,7 @@ global using AutoMapper;
 global using Newtonsoft.Json;
 global using StackExchange.Redis;
 global using JsonSerializer = System.Text.Json.JsonSerializer;
-
+global using DesignsAndBuild.Service;
+global using DesignsAndBuild.Core.Mail.Contract;
 
 

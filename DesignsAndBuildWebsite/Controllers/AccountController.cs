@@ -1,4 +1,6 @@
-﻿namespace DesignsAndBuild.APIs.Controllers;
+﻿using DesignsAndBuild.Core.Entities.Identity;
+
+namespace DesignsAndBuild.APIs.Controllers;
 
 public class AccountController : BaseApiController
 {
@@ -8,13 +10,14 @@ public class AccountController : BaseApiController
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IConfiguration _configuration;
     private readonly HttpClient _httpClient;
-
+    private readonly IMaillingService _mailService;
 
     public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
         IAuthService authService,
         RoleManager<IdentityRole> roleManager,
         IConfiguration configuration,
-        HttpClient httpClient
+        HttpClient httpClient,
+        IMaillingService mailService
         )
     {
         _userManager = userManager;
@@ -23,6 +26,7 @@ public class AccountController : BaseApiController
         _roleManager = roleManager;
         _configuration = configuration;
         _httpClient = httpClient;
+        _mailService = mailService;
     }
 
     [HttpPost("login")]
@@ -63,13 +67,19 @@ public class AccountController : BaseApiController
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token }, Request.Scheme);
-                var email = new Email()
-                {
-                    Title = "Reset Password",
-                    To = model.Email,
-                    Body = resetPasswordLink
-                };
-                EmailSettings.SendEmail(email);
+             
+                var bodyUrl = $"{Directory.GetCurrentDirectory()}\\wwwroot\\TempleteHtml\\ForgetPasswordTemplete.html";
+                var body = new StreamReader(bodyUrl);
+                var mailText = body.ReadToEnd();
+                body.Close();
+
+                mailText = mailText.Replace("[username]", user.UserName).Replace("[LinkHere]", resetPasswordLink);
+
+                var result = await _mailService.SendEmailAsync(model.Email, "Reset Password", mailText);
+                if(result == false)
+                    return BadRequest(new ApiResponse(400,"No Internet Connection"));
+
+
                 return Ok(model);
             }
             return Unauthorized(new ApiResponse(401));
