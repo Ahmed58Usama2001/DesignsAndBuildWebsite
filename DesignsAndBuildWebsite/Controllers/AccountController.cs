@@ -66,7 +66,7 @@ public class AccountController : BaseApiController
             if (user is not null)
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token }, Request.Scheme, _configuration["AngularBaseUrl"]);
+                var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token },"http", _configuration["AngularBaseUrl"]);
 
                 //var resetPasswordLink = "www.facebook.com"; 
 

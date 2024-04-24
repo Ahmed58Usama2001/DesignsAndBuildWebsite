@@ -13,7 +13,10 @@ public class OurProjectReturnDto
     public string Description { get; set; }
     public string ArabicDescription { get; set; }
 
-    public int? DurationInDays { get; set; }
+    public string Location { get; set; }
+    public string ArabicLocation { get; set; }
+
+    public string Year { get; set; }
 
     public string VideoUrl { get; set; }
 

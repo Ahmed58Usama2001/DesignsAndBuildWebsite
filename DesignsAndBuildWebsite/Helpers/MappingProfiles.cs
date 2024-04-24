@@ -15,28 +15,11 @@ public class MappingProfiles : Profile
 
         CreateMap<OurProject, OurProjectReturnDto>()
             .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom<VideoUrlResolver>())
-            .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom<ImageUrlResolver>())
-            .ForMember(dest => dest.DurationInDays, opt => opt.MapFrom<DurationInDaysResolver>());
+            .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom<ImageUrlResolver>());
 
         #endregion
 
     }
 
 
-}
-
-public class DurationInDaysResolver : IValueResolver<OurProject, OurProjectReturnDto, int?>
-{
-    public int? Resolve(OurProject source, OurProjectReturnDto destination, int? destMember, ResolutionContext context)
-    {
-        if (source.StartDate.HasValue && source.EndDate.HasValue)
-        {
-            TimeSpan difference = source.EndDate.Value.Date - source.StartDate.Value.Date;
-            return difference.Days;
-        }
-        else
-        {
-            return 0; // or 0 if you prefer
-        }
-    }
 }

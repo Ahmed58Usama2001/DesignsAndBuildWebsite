@@ -86,8 +86,6 @@ public class ProjectServices: IProjectServices
         storedProject.ArabicClientName=newProject.ArabicClientName;
         storedProject.ArabicDescription=newProject.ArabicDescription;
         storedProject.Images = newProject.Images;
-        storedProject.StartDate=newProject.StartDate;
-        storedProject.EndDate=newProject.EndDate;
         storedProject.VideoUrl=newProject.VideoUrl;
 
         try

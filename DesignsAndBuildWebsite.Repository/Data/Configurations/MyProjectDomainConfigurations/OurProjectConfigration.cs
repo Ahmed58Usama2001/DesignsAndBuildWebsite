@@ -13,22 +13,39 @@ public class OurProjectConfigration : IEntityTypeConfiguration<OurProject>
         builder.Property(x => x.Title)
             .IsRequired()
             .HasMaxLength(shortMaxLength);
+
         builder.Property(x => x.ArabicTitle)
-            .IsRequired()
-            .HasMaxLength(shortMaxLength);
+         .IsRequired()
+         .HasMaxLength(shortMaxLength);
+
+    
+
+        builder.Property(x => x.ArabicClientName)
+        .HasMaxLength(shortMaxLength);
 
         builder.Property(x => x.ClientName)
-        .HasMaxLength(shortMaxLength);
-        builder.Property(x => x.ArabicClientName)
             .HasMaxLength(shortMaxLength);
 
         builder.Property(x => x.Description)
         .IsRequired()
         .HasMaxLength(longMaxLength);
+        
         builder.Property(x => x.ArabicDescription)
             .IsRequired()
             .HasMaxLength(longMaxLength);
 
+        builder.Property(x=>x.Location)
+            .IsRequired()
+            .HasMaxLength (shortMaxLength);
+
+        builder.Property(x => x.ArabicLocation)
+           .IsRequired()
+           .HasMaxLength(shortMaxLength);
+
+
+        builder.Property(x => x.Year)
+           .IsRequired()
+           .HasMaxLength(4);
 
         builder.HasMany(x => x.Images)
             .WithOne()
