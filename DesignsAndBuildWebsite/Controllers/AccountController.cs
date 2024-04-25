@@ -242,6 +242,7 @@ public class AccountController : BaseApiController
         }
     }
 
+    [Authorize]
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
     {
