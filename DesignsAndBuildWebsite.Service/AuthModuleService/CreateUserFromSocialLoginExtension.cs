@@ -1,4 +1,6 @@
-﻿namespace DesignsAndBuild.Service.AuthModuleService;
+﻿using System.Text.RegularExpressions;
+
+namespace DesignsAndBuild.Service.AuthModuleService;
 
 public static class CreateUserFromSocialLoginExtension
 {
@@ -15,10 +17,12 @@ public static class CreateUserFromSocialLoginExtension
 
         if (user is null)
         {
+            var userName= IsUsernameLatinChars(user.UserName)? user.UserName: model.Email.Split('@').First();
+
             user = new AppUser
             {
                 Email = model.Email,
-                UserName = model.Email.Split('@').First(),
+                UserName = userName,
                 ProfilePictureUrl = model.ProfilePicture,
                 RegistrationDate = DateTime.Now
             };
@@ -59,4 +63,18 @@ public static class CreateUserFromSocialLoginExtension
         else
             return null;
     }
+
+  
+        private static bool IsUsernameLatinChars(string username)
+        {
+            // Matches only letters (a-z and A-Z)
+            var regex = @"^[a-zA-Z]+$";
+            return Regex.IsMatch(username, regex);
+        }
+    
+
 }
+
+
+
+
