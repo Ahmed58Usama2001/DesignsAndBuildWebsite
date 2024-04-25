@@ -1,5 +1,6 @@
 ﻿using DesignsAndBuild.Core.Entities.Identity;
 using DesignsAndBuild.Core.Mail.Contract;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace DesignsAndBuild.APIs.Controllers;
 
@@ -186,13 +187,23 @@ public class AccountController : BaseApiController
     }
 
     [HttpPost("GoogleSignIn")]
-    public async Task<IActionResult> GoogleSignIn(GoogleSignInVM model)
+    public async Task<ActionResult<UserDto>> GoogleSignIn(GoogleSignInVM model)
     {
         try
         {
-            var result = (IActionResult)await _authService.SignInWithGoogle(model);
+            var result = await _authService.SignInWithGoogle(model);
             if (result != null)
-                return Ok(result);
+            {
+                UserDto userDto = new UserDto()
+                {
+                    UserName=result.UserName??string.Empty,
+                    ProfilePictureUrl=result.ProfilePictureUrl,
+                    Email=result.Email ?? string.Empty,
+                    Token = await _authService.CreateTokenAsync(result, _userManager)
+                };
+
+                return Ok(userDto);
+            }
             else
                 return BadRequest(new ApiResponse(400));
         }

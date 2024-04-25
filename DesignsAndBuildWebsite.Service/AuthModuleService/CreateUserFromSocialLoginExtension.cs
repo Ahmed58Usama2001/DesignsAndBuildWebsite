@@ -6,12 +6,10 @@ public static class CreateUserFromSocialLoginExtension
     public static async Task<AppUser> CreateUserFromSocialLogin(this UserManager<AppUser> userManager, DesignsAndBuildContext context, CreateUserFromSocialLogin model, LoginProvider loginProvider)
     {
         //CHECKS IF THE USER HAS NOT ALREADY BEEN LINKED TO AN IDENTITY PROVIDER
-        // var user = await userManager.FindByLoginAsync(loginProvider.GetDisplayName(), model.LoginProviderSubject);
+        var user = await userManager.FindByLoginAsync(loginProvider.GetDisplayName(), model.LoginProviderSubject);
 
-        AppUser? user;
-
-        //if (user is not null)
-        //    return user; //USER ALREADY EXISTS.
+        if (user is not null)
+            return user; //USER ALREADY EXISTS.
 
         user = await userManager.FindByEmailAsync(model.Email);
 

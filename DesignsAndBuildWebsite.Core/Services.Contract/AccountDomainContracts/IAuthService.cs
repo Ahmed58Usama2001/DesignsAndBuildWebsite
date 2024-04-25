@@ -6,7 +6,7 @@ public interface IAuthService
 
     Task<bool> InvalidateSignedInTokenAsync(string token);
 
-    Task<JwtResponseVM> SignInWithGoogle(GoogleSignInVM model);
+    Task<AppUser> SignInWithGoogle(GoogleSignInVM model);
     Task<JwtResponseVM> SignInWithFacebook(FacebookSignInVM model);
 
 }
