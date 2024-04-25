@@ -26,7 +26,7 @@ public class GoogleAuthService : IGoogleAuthService
         {
             payload = await ValidateAsync(model.IdToken, new ValidationSettings
             {
-                Audience = new[] { _googleAuthConfig.ClientId }
+                Audience = new[] { model.ClientId }
             });
 
         }
