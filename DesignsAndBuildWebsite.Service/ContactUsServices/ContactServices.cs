@@ -17,7 +17,7 @@ public class ContactServices: IUserMessageServices
             await _unitOfWork.Repository<UserMessage>().AddAsync(message);
 
             var result = await _unitOfWork.CompleteAsync();
-            if (result <= 1) return null;
+            if (result <= 0) return null;
 
             return message;
         }

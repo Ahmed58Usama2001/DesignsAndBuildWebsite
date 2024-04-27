@@ -15,6 +15,11 @@ public class UserMessage :BaseEntity
     public bool IsSeen { get; set; }
 
     public DateTime? SeenDate { get; set; }
-    public DateTime? SendDate { get; set; }=DateTime.UtcNow;
-   
+    public DateTime? SendDate { get; set; }
+
+    public UserMessage()
+    {
+        SendDate = DateTime.Now;
+    }
+
 }

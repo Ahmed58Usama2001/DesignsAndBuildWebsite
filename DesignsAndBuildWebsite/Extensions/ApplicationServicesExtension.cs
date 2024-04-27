@@ -1,4 +1,6 @@
-﻿namespace DesignsAndBuild.APIs.Extensions;
+﻿using DesignsAndBuild.Service.ContactUsServices;
+
+namespace DesignsAndBuild.APIs.Extensions;
 
 public static class ApplicationServicesExtension
 {
@@ -7,6 +9,7 @@ public static class ApplicationServicesExtension
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         services.AddScoped(typeof(IProjectServices), typeof(ProjectServices));
         services.AddScoped(typeof(IMaillingService), typeof(MailService));
+        services.AddScoped(typeof(IUserMessageServices), typeof(ContactServices));
 
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddHttpClient();
