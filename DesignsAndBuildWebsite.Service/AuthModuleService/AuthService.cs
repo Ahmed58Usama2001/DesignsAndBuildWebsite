@@ -94,7 +94,7 @@ public class AuthService : IAuthService
         var token = new JwtSecurityToken(
             audience: _configuration["JWT:ValidAudience"],
             issuer: _configuration["JWT:ValidIssuer"],
-            expires: DateTime.UtcNow.AddDays(double.Parse(_configuration["JWT:DurationInDays"]??"0" )),
+            expires: DateTime.UtcNow.AddDays(double.Parse(_configuration["JWT:DurationInDays"]??"1" )),
             claims: authClaims,
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
         );

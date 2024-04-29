@@ -1,12 +1,13 @@
-﻿global using DesignsAndBuild.Core.Mail.Contract;
+﻿global using DesignsAndBuild.Core.Entities;
+global using DesignsAndBuild.Core.Mail.Contract;
 global using DesignsAndBuild.Core.Entities.Identity;
-global using DesignsAndBuild.Core.Entities.MailSettings;
 global using DesignsAndBuild.Core.Repositories.Contract;
 global using DesignsAndBuild.Core.Entities.Identity.Gmail;
 global using DesignsAndBuild.Core.Entities.Identity.Enums;
 global using DesignsAndBuild.Repository.Data.Configurations;
 global using DesignsAndBuild.Core.Entities.Identity.Facebook;
 global using DesignsAndBuild.Core.Specifications.Contact_Specs;
+global using DesignsAndBuild.Core.Entities.ContactDomainEntities;
 global using DesignsAndBuild.Core.Specifications.OurProject_Specs;
 global using DesignsAndBuild.Core.Entities.OurProjectDomainEntity;
 global using DesignsAndBuild.Core.Services.Contract.AccountModuleContracts;

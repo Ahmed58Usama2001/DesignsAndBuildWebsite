@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DesignsAndBuild.Core.Entities.OurProjectDomainEntity;
+﻿namespace DesignsAndBuild.Core.Entities.OurProjectDomainEntity;
 
 public class OurProject : BaseEntity
 {

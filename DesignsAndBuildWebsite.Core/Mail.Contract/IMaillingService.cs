@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-namespace DesignsAndBuild.Core.Mail.Contract;
+﻿namespace DesignsAndBuild.Core.Mail.Contract;
 
 public interface IMaillingService
 {

@@ -1,4 +1,4 @@
-﻿namespace DesignsAndBuild.Core.Entities.MailSettings;
+﻿namespace DesignsAndBuild.Core.Entities.ContactDomainEntities;
 
 public class UserMessage :BaseEntity
 {

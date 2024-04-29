@@ -2,8 +2,8 @@
 global using DesignsAndBuild.Core.Specifications;
 global using DesignsAndBuild.Core.Entities.Identity;
 global using DesignsAndBuild.Core.Repositories.Contract;
-global using DesignsAndBuild.Core.Entities.MailSettings;
 global using DesignsAndBuild.Repository.Data.Configurations;
+global using DesignsAndBuild.Core.Entities.ContactDomainEntities;
 global using DesignsAndBuild.Core.Entities.OurProjectDomainEntity;
 
 global using Microsoft.AspNetCore.Identity;
